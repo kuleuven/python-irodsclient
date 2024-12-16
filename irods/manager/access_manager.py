@@ -102,7 +102,7 @@ class AccessManager(Manager):
         #   (depending on the nature of the fix we may make it conditional, based on the server --
         #   if for example in upcoming iRODS 4.2.12 and >=4.3.1 outdated userIDs in R_OBJT_ACCESS
         #   are guaranteed to be systematically and atomically purged.
-        extant_ids = set(u[User.id] for u in self.sess.query(User).limit(1000000))
+        extant_ids = set(u[User.id] for u in self.sess.query(User).limit(20000))
         rows  = [r for r in query_func(target.path) if r[access_column.user_id] in extant_ids]
         userids = set( r[access_column.user_id] for r in rows )
 
